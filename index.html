@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link href="style.css">
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<script src="./index.js"></script>
+</head>
+<body>
+<div id="register">
+<h1>Ton Nom:</h1>
+<form onsubmit="register(); return false;" accept-charset="UTF-8">
+<input type="text" name="name" value="" id="name" required>
+<input type="submit" value="Join!">
+</form>
+</div>
+<div id="userAdd" style="display: none;">
+<h1>Se Connecter a un autre utilisateur:</h1>
+<form onsubmit="appelUser(); return false;" accept-charset="UTF-8">
+<input type="text" name="name" value="" id="add" required>
+<input type="submit" value="Add">
+</form>
+</div>
+<div id="userShare" style="display: none;">
+<h1>Partager son ecran:</h1>
+<form onsubmit="addScreenShare(); return false;" accept-
+charset="UTF-8">
+<input type="text" name="name" value="" id="share" required>
+<input type="submit" value="share">
+</form>
+</div>
+<div id="participants"></div>
+</body>
+</html>
