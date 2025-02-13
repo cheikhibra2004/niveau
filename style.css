@@ -1,5 +1,5 @@
 body {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Fond général noir */
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -7,8 +7,15 @@ body {
     padding: 0;
 }
 
+/* Page d'accueil en bleu */
+.register-page {
+    background-color: #007BFF; /* Bleu pour la page d'accueil */
+    padding: 50px 0;
+    border-radius: 10px;
+}
+
 h1 {
-    color: #007BFF;
+    color: #ffffff; /* Texte blanc sur fond bleu */
 }
 
 form {
@@ -21,7 +28,7 @@ form {
 
 input[type="text"] {
     padding: 10px;
-    border: 1px solid #007BFF;
+    border: 1px solid #007BFF; /* Bordure bleue */
     border-radius: 5px;
     background-color: #fff;
     color: #000;
@@ -29,7 +36,7 @@ input[type="text"] {
 }
 
 input[type="submit"], button {
-    background-color: #007BFF;
+    background-color: #007BFF; /* Bleu pour les boutons */
     color: white;
     border: none;
     padding: 10px 15px;
@@ -40,23 +47,12 @@ input[type="submit"], button {
 }
 
 input[type="submit"]:hover, button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Couleur plus foncée au survol */
 }
 
-#participants {
-    margin-top: 20px;
-}
-
-video {
-    width: 300px;
-    height: auto;
-    border: 2px solid #007BFF;
-    border-radius: 10px;
-    margin: 10px;
-}
-
+/* Ajout de la couleur rouge pour le bouton de fin d'appel */
 #endCall {
-    background-color: red;
+    background-color: red; /* Rouge pour le bouton raccrocher */
     border-radius: 50%;
     padding: 15px;
     position: fixed;
@@ -73,7 +69,19 @@ video {
 }
 
 #endCall:hover {
-    background-color: darkred;
+    background-color: darkred; /* Couleur plus foncée au survol */
+}
+
+#participants {
+    margin-top: 20px;
+}
+
+video {
+    width: 300px;
+    height: auto;
+    border: 2px solid #007BFF; /* Bordure bleue autour des vidéos */
+    border-radius: 10px;
+    margin: 10px;
 }
 
 
