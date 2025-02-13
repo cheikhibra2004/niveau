@@ -3,65 +3,80 @@ let myStream;
 let currentCall;
 
 function ajoutVideo(stream) {
-    let video = document.createElement('video');
-    document.getElementById('participants').appendChild(video);
-    video.autoplay = true;
-    video.controls = true;
-    video.srcObject = stream;
+    try {
+        var video = document.createElement('video');
+        document.getElementById('participants').appendChild(video);
+        video.autoplay = true;
+        video.controls = true;
+        video.srcObject = stream;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function register() {
-    let name = document.getElementById('name').value;
-    if (!name) return; // Empêche de valider si le champ est vide
+    var name = document.getElementById('name').value;
+    try {
+        peer = new Peer(name);
+        navigator.getUserMedia({video: true, audio: true}, function(stream) {
+            myStream = stream;
+            ajoutVideo(stream);
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('userAdd').style.display = 'block';
+            document.getElementById('userShare').style.display = 'block';
+            document.getElementById('endCall').style.display = 'block'; // Le bouton apparaît maintenant
 
-    peer = new Peer(name);
-
-    peer.on('open', () => {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-            .then(stream => {
-                myStream = stream;
-                ajoutVideo(stream);
-
-                // Masquer l'écran d'inscription et afficher l'appel
-                document.getElementById('register').style.display = 'none';
-                document.getElementById('callInterface').style.display = 'block';
-
-                // Écouter les appels entrants
-                peer.on('call', call => {
-                    call.answer(myStream);
-                    currentCall = call;
-                    call.on('stream', remoteStream => {
-                        ajoutVideo(remoteStream);
-                    });
+            peer.on('call', function(call) {
+                call.answer(myStream);
+                currentCall = call;
+                call.on('stream', function(remoteStream) {
+                    ajoutVideo(remoteStream);
                 });
-
-            }).catch(err => {
-                console.error('Erreur d’accès à la caméra/micro:', err);
             });
-    });
+        }, function(err) {
+            console.log('Failed to get local stream', err);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function appelUser() {
+    try {
+        var name = document.getElementById('add').value;
+        document.getElementById('add').value = "";
+        var call = peer.call(name, myStream);
+        currentCall = call;
+        call.on('stream', function(remoteStream) {
+            ajoutVideo(remoteStream);
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function addScreenShare() {
-    navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
-        .then(screenStream => {
-            let call = peer.call(peer.id, screenStream);
-            currentCall = call;
-        })
-        .catch(err => {
-            console.error("Erreur lors du partage d'écran :", err);
-        });
+    var name = document.getElementById('share').value;
+    document.getElementById('share').value = "";
+    navigator.mediaDevices.getDisplayMedia({video: {cursor: "always"}, audio: true})
+    .then((stream) => {
+        let call = peer.call(name, stream);
+        currentCall = call;
+    });
 }
 
 function endCall() {
     if (currentCall) {
-        currentCall.close();
-        document.getElementById('participants').innerHTML = ""; // Supprimer les vidéos
+        currentCall.close(); // Terminer l'appel
+        document.getElementById('participants').innerHTML = ""; // Effacer les vidéos
+        document.getElementById('endCall').style.display = 'none'; // Cacher le bouton après l'appel
     }
     if (myStream) {
-        myStream.getTracks().forEach(track => track.stop());
+        myStream.getTracks().forEach(track => track.stop()); // Arrêter les flux locaux
     }
 
-    // Retour à l'écran d'accueil
-    document.getElementById('register').style.display = 'block';
-    document.getElementById('callInterface').style.display = 'none';
+    // Retour à l'écran d'inscription
+    document.getElementById('register').style.display = 'block'; // Afficher l'écran d'inscription
+    document.getElementById('userAdd').style.display = 'none'; // Cacher la section de connexion
+    document.getElementById('userShare').style.display = 'none'; // Cacher la section de partage d'écran
 }
