@@ -7,14 +7,15 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     height: 100vh;
 }
 
 .register-page {
-    background-color: #00aaff; /* Bleu plus vif */
-    padding: 50px 0;
+    background-color: #00aaff;
+    padding: 50px;
     border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -53,6 +54,12 @@ button:hover, input[type="submit"]:hover {
     background-color: #0088cc;
 }
 
+#callInterface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #participants {
     display: flex;
     flex-wrap: wrap;
@@ -64,10 +71,10 @@ button:hover, input[type="submit"]:hover {
 }
 
 video {
-    width: 500px; /* Augmentation de la largeur */
+    width: 500px; /* Vidéo plus grande */
     height: auto;
-    border: 3px solid #00aaff; /* Bordure plus épaisse */
-    border-radius: 15px; /* Coins arrondis */
+    border: 3px solid #00aaff;
+    border-radius: 15px;
     margin: 10px;
 }
 
@@ -75,10 +82,7 @@ video {
     background-color: red;
     border-radius: 50%;
     padding: 15px;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 20px;
     border: none;
     cursor: pointer;
     z-index: 10;
