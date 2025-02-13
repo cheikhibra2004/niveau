@@ -1,5 +1,5 @@
 body {
-    background-color: #1a1a1a; /* Fond général noir */
+    background-color: #87CEFA; /* Bleu clair */
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -8,18 +8,17 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh; /* Utilisation de toute la hauteur de la fenêtre */
+    height: 100vh;
 }
 
-/* Page d'accueil en bleu */
 .register-page {
-    background-color: #007BFF; /* Bleu pour la page d'accueil */
+    background-color: #00aaff; /* Bleu plus vif */
     padding: 50px 0;
     border-radius: 10px;
 }
 
 h1 {
-    color: #ffffff; /* Texte blanc sur fond bleu */
+    color: white;
 }
 
 form {
@@ -32,15 +31,15 @@ form {
 
 input[type="text"] {
     padding: 10px;
-    border: 1px solid #007BFF; /* Bordure bleue */
+    border: 1px solid #00aaff;
     border-radius: 5px;
-    background-color: #fff;
-    color: #000;
+    background-color: white;
+    color: black;
     width: 200px;
 }
 
-input[type="submit"], button {
-    background-color: #007BFF; /* Bleu pour les boutons */
+button, input[type="submit"] {
+    background-color: #00aaff;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -50,52 +49,41 @@ input[type="submit"], button {
     transition: 0.3s;
 }
 
-input[type="submit"]:hover, button:hover {
-    background-color: #0056b3; /* Couleur plus foncée au survol */
+button:hover, input[type="submit"]:hover {
+    background-color: #0088cc;
 }
 
 #participants {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centrer les vidéos */
+    justify-content: center;
     margin-top: 20px;
     overflow: auto;
-    flex-grow: 1; /* Permet au conteneur de prendre tout l'espace disponible */
-    padding-bottom: 60px; /* Assure que l'espace pour les vidéos ne soit pas superposé par le bouton */
+    flex-grow: 1;
+    padding-bottom: 60px;
 }
 
 video {
-    width: 300px;
+    width: 500px; /* Augmentation de la largeur */
     height: auto;
-    border: 2px solid #007BFF; /* Bordure bleue autour des vidéos */
-    border-radius: 10px;
+    border: 3px solid #00aaff; /* Bordure plus épaisse */
+    border-radius: 15px; /* Coins arrondis */
     margin: 10px;
 }
 
-/* Bouton raccrocher positionné en bas de l'écran */
 #endCall {
-    background-color: red; /* Rouge pour le bouton raccrocher */
+    background-color: red;
     border-radius: 50%;
     padding: 15px;
     position: fixed;
-    bottom: 20px; /* Décalage vers le bas pour éviter la superposition avec les vidéos */
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     border: none;
     cursor: pointer;
-    z-index: 10; /* Assure que le bouton est au-dessus des vidéos */
-}
-
-#endCall img {
-    width: 30px;
-    height: 30px;
+    z-index: 10;
 }
 
 #endCall:hover {
-    background-color: darkred; /* Couleur plus foncée au survol */
+    background-color: darkred;
 }
-
-
-
-
-
