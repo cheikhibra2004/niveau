@@ -24,7 +24,7 @@ function register() {
             document.getElementById('register').style.display = 'none';
             document.getElementById('userAdd').style.display = 'block';
             document.getElementById('userShare').style.display = 'block';
-            document.getElementById('endCall').style.display = 'block';
+            document.getElementById('endCall').style.display = 'block'; // Le bouton apparaît maintenant
 
             peer.on('call', function(call) {
                 call.answer(myStream);
@@ -67,13 +67,18 @@ function addScreenShare() {
 
 function endCall() {
     if (currentCall) {
-        currentCall.close();
-        document.getElementById('participants').innerHTML = "";
-        document.getElementById('endCall').style.display = 'none';
+        currentCall.close(); // Terminer l'appel
+        document.getElementById('participants').innerHTML = ""; // Effacer les vidéos
+        document.getElementById('endCall').style.display = 'none'; // Cacher le bouton après l'appel
     }
     if (myStream) {
-        myStream.getTracks().forEach(track => track.stop());
+        myStream.getTracks().forEach(track => track.stop()); // Arrêter les flux locaux
     }
+
+    // Retour à l'écran d'inscription
+    document.getElementById('register').style.display = 'block'; // Afficher l'écran d'inscription
+    document.getElementById('userAdd').style.display = 'none'; // Cacher la section de connexion
+    document.getElementById('userShare').style.display = 'none'; // Cacher la section de partage d'écran
 }
 
 
