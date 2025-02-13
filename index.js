@@ -12,29 +12,33 @@ function ajoutVideo(stream) {
 
 function register() {
     let name = document.getElementById('name').value;
+    if (!name) return; // Empêche de valider si le champ est vide
+
     peer = new Peer(name);
 
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then(stream => {
-            myStream = stream;
-            ajoutVideo(stream);
+    peer.on('open', () => {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                myStream = stream;
+                ajoutVideo(stream);
 
-            // Masquer l'écran d'inscription et afficher l'appel
-            document.getElementById('register').style.display = 'none';
-            document.getElementById('callInterface').style.display = 'block';
+                // Masquer l'écran d'inscription et afficher l'appel
+                document.getElementById('register').style.display = 'none';
+                document.getElementById('callInterface').style.display = 'block';
 
-            // Écouter les appels entrants
-            peer.on('call', call => {
-                call.answer(myStream);
-                currentCall = call;
-                call.on('stream', remoteStream => {
-                    ajoutVideo(remoteStream);
+                // Écouter les appels entrants
+                peer.on('call', call => {
+                    call.answer(myStream);
+                    currentCall = call;
+                    call.on('stream', remoteStream => {
+                        ajoutVideo(remoteStream);
+                    });
                 });
-            });
 
-        }).catch(err => {
-            console.error('Erreur d’accès à la caméra/micro:', err);
-        });
+            }).catch(err => {
+                console.error('Erreur d’accès à la caméra/micro:', err);
+            });
+    });
 }
 
 function addScreenShare() {
